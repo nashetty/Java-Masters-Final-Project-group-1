@@ -1,4 +1,4 @@
-package com.codefirstgirls.green_energy_manager;
+package com.codefirstgirls.green_energy_manager.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

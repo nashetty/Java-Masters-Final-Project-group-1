@@ -37,4 +37,8 @@ VALUES
 ('generated', 'wind', 4.0),
 ('used', NULL, 1.8);
 
-SELECT * FROM energy;
+-- SELECT * FROM energy;
+--
+-- SELECT SUM(amount_K_W) AS total_kW, transactionType FROM energy WHERE transactionType = 'used';
+-- SELECT SUM(amount_K_W) AS total_kW, transactionType FROM energy WHERE transactionType = 'generated';
+-- SELECT SUM(amount_K_W) AS total_kW, transactionType FROM energy GROUP BY transactionType;

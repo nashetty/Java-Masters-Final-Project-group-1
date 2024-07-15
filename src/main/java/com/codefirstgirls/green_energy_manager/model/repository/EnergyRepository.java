@@ -1,5 +1,6 @@
-package com.codefirstgirls.green_energy_manager;
+package com.codefirstgirls.green_energy_manager.model.repository;
 
+import com.codefirstgirls.green_energy_manager.model.entity.Energy;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
