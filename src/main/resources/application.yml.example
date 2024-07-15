@@ -2,7 +2,7 @@ spring:
   application:
     name: green-energy-manager
   datasource:
-    url: jdbc:mysql://localhost:3306/guitar_db
+    url: jdbc:mysql://localhost:3306/energy_manager
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: xxx
     password: xxx
