@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface EnergyRepository extends JpaRepository<Energy, Integer> {
-    List<Energy> findByTransactionId(Integer id);
+//    List<Energy> findByTransactionId(Integer id);
 }
 
