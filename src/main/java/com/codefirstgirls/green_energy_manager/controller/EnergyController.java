@@ -66,6 +66,13 @@ public class EnergyController {
 
     @GetMapping("/netMonthlyEnergyDifference")
     public ResponseEntity<Map<String, Object>> netEnergyDifferenceCalculation(@RequestParam int month) {
+        if (month < 1 || month > 12) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Invalid month. Please provide a month value between 1 and 12.");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+
+
         try {
             List<Object[]> monthlyTotals = energyRepository.findTotalMonthlyEnergy(month);
 
