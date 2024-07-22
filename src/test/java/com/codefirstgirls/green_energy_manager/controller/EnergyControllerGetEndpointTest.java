@@ -124,7 +124,7 @@ public class EnergyControllerGetEndpointTest {
                 .contentType("application/json")
                 .body(meterReading)
                 .when()
-                .post("/api/energy/postReading")
+                .post("/api/energy/meterReading")
                 .then()
                 .statusCode(HttpStatus.OK.value())
 //                for checking
@@ -151,7 +151,7 @@ public class EnergyControllerGetEndpointTest {
                 .contentType("application/json")
                 .body(meterReading)
                 .when()
-                .post("/api/energy/postReading")
+                .post("/api/energy/meterReading")
                 .then()
                 .statusCode(HttpStatus.OK.value())
 //                for checking
@@ -176,7 +176,7 @@ public class EnergyControllerGetEndpointTest {
                 .contentType("application/json")
                 .body(meterReading)
                 .when()
-                .post("/api/energy/postReading")
+                .post("/api/energy/meterReading")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
     }
@@ -198,7 +198,7 @@ public class EnergyControllerGetEndpointTest {
                 .contentType("application/json")
                 .body(meterReading) // Use the correct variable name
                 .when()
-                .post("/api/energy/postReading")
+                .post("/api/energy/meterReading")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
 
@@ -212,7 +212,7 @@ public class EnergyControllerGetEndpointTest {
                 .contentType("application/json")
                 .body("{}")
                 .when()
-                .post("/api/energy/postReading")
+                .post("/api/energy/meterReading")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
     }
@@ -230,8 +230,9 @@ public class EnergyControllerGetEndpointTest {
                 .contentType("application/json")
                 .body(meterReading)
                 .when()
-                .post("/api/energy/postReading")
+                .post("/api/energy/meterReading")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
     }
+
 }

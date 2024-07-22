@@ -23,6 +23,7 @@ public class EnergyController {
     @Autowired
     private EnergyRepository energyRepository;
 
+// Post request for users to send in their meter readings
     @PostMapping("/meterReading")
     public ResponseEntity<String> postNewEnergyReading(@RequestBody Energy energyInfo){
         try{
@@ -52,15 +53,6 @@ public class EnergyController {
             return ResponseEntity.badRequest().body("Failed to add the new energy reading submission." + e.getMessage());
         }
     }
-
-    //    @GetMapping("/types")
-    //    public ResponseEntity<String> getTypes() {
-    //        String getEnergyFirst = energyRepository.findAll().getFirst().getEnergyType();
-    //        log.info("Retrieved energy type: " + getEnergyFirst);
-    //        return  ResponseEntity.ok("Energy type returned: " + getEnergyFirst );
-    //    }
-
-
 
      // GET endpoint which calculates the net energy difference for a specified month.
 
