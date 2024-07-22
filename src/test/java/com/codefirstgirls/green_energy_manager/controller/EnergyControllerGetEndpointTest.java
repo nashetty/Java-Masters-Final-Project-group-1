@@ -1,6 +1,8 @@
 package com.codefirstgirls.green_energy_manager.controller;
 
+import com.codefirstgirls.green_energy_manager.model.entity.Energy;
 import com.codefirstgirls.green_energy_manager.model.repository.EnergyRepository;
+import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,12 +12,16 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @Slf4j
@@ -98,5 +104,134 @@ public class EnergyControllerGetEndpointTest {
         assertEquals("Net Energy Difference for AUGUST is: 0 kWh", responseBody.get("netEnergyDifference"));
 
         log.info("netEnergyDifferenceCalculation_emptyData test passed.");
+    }
+
+    @Test
+    public void postReading_calledWithEnergyClass_forGenerated(){
+        RestAssuredMockMvc.standaloneSetup(energyController);
+        Energy meterReading = new Energy();
+        meterReading.setTransactionType("GENERATED");
+        meterReading.setEnergyType("solar");
+        meterReading.setAmountKW(BigDecimal.valueOf(50.1));
+        meterReading.setTransactionDate(new Date());
+
+        // tried to use the save, by had to use any due to the dynamic nature of the transactionDate
+        when(energyRepository.save(any(Energy.class))).thenReturn(meterReading);
+
+        // Test the endpoint
+        RestAssuredMockMvc
+                .given()
+                .contentType("application/json")
+                .body(meterReading)
+                .when()
+                .post("/api/energy/postReading")
+                .then()
+                .statusCode(HttpStatus.OK.value())
+//                for checking
+//                    .log().all();
+                .body(equalTo("New energy reading added" + meterReading));
+
+    }
+
+    @Test
+    public void postReading_calledWithEnergyClass_forUsed(){
+        RestAssuredMockMvc.standaloneSetup(energyController);
+        Energy meterReading = new Energy();
+        meterReading.setTransactionType("USED");
+        meterReading.setEnergyType("wind");
+        meterReading.setAmountKW(BigDecimal.valueOf(48.1));
+        meterReading.setTransactionDate(new Date());
+
+        // tried to use the save, by had to use any due to the dynamic nature of the transactionDate
+        when(energyRepository.save(any(Energy.class))).thenReturn(meterReading);
+
+        // Test the endpoint
+        RestAssuredMockMvc
+                .given()
+                .contentType("application/json")
+                .body(meterReading)
+                .when()
+                .post("/api/energy/postReading")
+                .then()
+                .statusCode(HttpStatus.OK.value())
+//                for checking
+//                    .log().all();
+                .body(equalTo("New energy reading added" + meterReading));
+
+    }
+
+    @Test
+    public void postReading_calledWithEnergyClass_ThrowsError(){
+        RestAssuredMockMvc.standaloneSetup(energyController);
+        Energy meterReading = new Energy();
+        meterReading.setTransactionType("NOTVALID");
+        meterReading.setEnergyType("wind");
+        meterReading.setAmountKW(BigDecimal.valueOf(48.1));
+        meterReading.setTransactionDate(new Date());
+
+
+        // Test the endpoint
+        RestAssuredMockMvc
+                .given()
+                .contentType("application/json")
+                .body(meterReading)
+                .when()
+                .post("/api/energy/postReading")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    public void postReading_calledWithInvalidTransactionType_ReturnBadRequest() throws Exception {
+        RestAssuredMockMvc.standaloneSetup(energyController);
+        Energy meterReading = new Energy();
+        meterReading.setTransactionType("GENERATED");
+        meterReading.setEnergyType("wind");
+        meterReading.setAmountKW(BigDecimal.valueOf(48.1));
+        meterReading.setTransactionDate(new Date());
+
+
+        when(energyRepository.save(any(Energy.class))).thenThrow(new RuntimeException("Database error"));
+
+        RestAssuredMockMvc
+                .given()
+                .contentType("application/json")
+                .body(meterReading) // Use the correct variable name
+                .when()
+                .post("/api/energy/postReading")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value());
+
+    }
+
+    @Test
+    public void postReading_calledWithEmptyBody_ReturnBadRequest() {
+        RestAssuredMockMvc.standaloneSetup(energyController);
+        RestAssuredMockMvc
+                .given()
+                .contentType("application/json")
+                .body("{}")
+                .when()
+                .post("/api/energy/postReading")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
+    //    because transaction type is the only not null
+    public void postReading_calledWithMissingTransactionType_ReturnBadRequest() {
+        RestAssuredMockMvc.standaloneSetup(energyController);
+        Energy meterReading = new Energy();
+        meterReading.setEnergyType("solar");
+        meterReading.setAmountKW(BigDecimal.valueOf(50.1));
+        meterReading.setTransactionDate(new Date());
+
+        RestAssuredMockMvc
+                .given()
+                .contentType("application/json")
+                .body(meterReading)
+                .when()
+                .post("/api/energy/postReading")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value());
     }
 }

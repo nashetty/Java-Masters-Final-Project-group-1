@@ -32,7 +32,7 @@ public class Energy {
 //    changed from double to BigDecimal to match sql database
     private BigDecimal amountKW;
 
-    @Column(name=" transaction_date")
+    @Column(name="transaction_date")
 //    changed from double to BigDecimal to match sql database
     private Date transactionDate;
 
