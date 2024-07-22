@@ -161,7 +161,7 @@ public class EnergyControllerGetEndpointTest {
     }
 
     @Test
-    public void postReading_calledWithEnergyClass_ThrowsError(){
+    public void postReading_calledWithInvalidTransactionType_ThrowsError(){
         RestAssuredMockMvc.standaloneSetup(energyController);
         Energy meterReading = new Energy();
         meterReading.setTransactionType("NOTVALID");
@@ -182,7 +182,7 @@ public class EnergyControllerGetEndpointTest {
     }
 
     @Test
-    public void postReading_calledWithInvalidTransactionType_ReturnBadRequest() throws Exception {
+    public void postReading_calledWithEnergyClass_ReturnBadRequest() throws Exception {
         RestAssuredMockMvc.standaloneSetup(energyController);
         Energy meterReading = new Energy();
         meterReading.setTransactionType("GENERATED");
