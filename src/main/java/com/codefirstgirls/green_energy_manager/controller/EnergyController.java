@@ -23,7 +23,7 @@ public class EnergyController {
     @Autowired
     private EnergyRepository energyRepository;
 
-    @PostMapping("/postReading")
+    @PostMapping("/meterReading")
     public ResponseEntity<String> postNewEnergyReading(@RequestBody Energy energyInfo){
         try{
 //            assign energy variable outside of scope to be used in the switch
