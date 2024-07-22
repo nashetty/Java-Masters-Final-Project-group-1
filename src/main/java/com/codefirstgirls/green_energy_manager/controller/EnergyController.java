@@ -56,7 +56,7 @@ public class EnergyController {
 
      // GET endpoint which calculates the net energy difference for a specified month.
 
-    @GetMapping("/netMonthlyEnergyDifference")
+    @GetMapping("/netDifference")
     public ResponseEntity<Map<String, Object>> netEnergyDifferenceCalculation(@RequestParam int month) {
         if (month < 1 || month > 12) {
             Map<String, Object> errorResponse = new HashMap<>();
@@ -108,7 +108,7 @@ public class EnergyController {
 }
 
 //  A Link to test @GetMapping endpoint:
-//  http://localhost:8080/api/energy/netMonthlyEnergyDifference?month=4
+//  http://localhost:8080/api/energy/netDifference?month=4
 //  Append the required month number as a query parameter to the end of the URL.
 // Swap '4' with the month number that the calculation of the net energy difference should be for.
 
