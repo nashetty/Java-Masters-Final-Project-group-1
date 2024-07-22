@@ -1,0 +1,159 @@
+# Project Requirements
+
+## Project Overview
+
+**What is the Project?**
+
+The Green Energy Manager is an application designed to help users track their energy usage and production. The application has two primary functionalities:
+1. Recording energy transactions.
+2. Calculating the Net Energy Difference (NED) for a specified month.
+
+The backend is built using Spring Boot and connects to a MySQL database.
+
+**Meaning of Net Energy Difference (NED)**
+
+- **Increased NED**: Indicates that energy generation exceeds consumption, reflecting efficient performance of the user’s energy system and potential excess production that could be exported to the grid.
+
+- **Decreased NED**: Indicates that energy consumption exceeds generation for the month. This might be due to increased energy use or insufficient production.
+
+**What Could the Application Be Used For?**
+- **Personal Energy Management**: Track energy consumption and generation.
+- **Cost Savings**: Identify opportunities for energy cost savings.
+- **Environmental Impact**: Contribute to sustainability goals by monitoring energy usage.
+- **Policy Compliance**: Assist with energy regulation compliance and eligibility for incentives.
+
+## Project Requirements
+
+### User Stories
+
+**User Story 1: Post New Energy Reading**
+- **As a user**, I want to submit new energy readings, so I can record my energy usage and production.
+- **Acceptance Criteria**:
+    - The system accepts POST requests to `/api/energy/meterReading`.
+    - Validates the `transactionType` as either "generated" or "used".
+    - On successful submission, returns a confirmation message.
+    - On failure, returns an appropriate error message.
+
+**User Story 2: Retrieve Net Energy Difference**
+- **As a user**, I want to calculate the net energy difference for a specific month, so I can see whether I am consuming or producing more energy.
+- **Acceptance Criteria**:
+    - The system accepts GET requests to `/api/energy/netDifference` with a month parameter.
+    - Calculates the net energy difference and returns a message with the result.
+    - Returns a meaningful error message if the month parameter is invalid.
+
+### Implementation
+
+- **POST `/api/energy/meterReading`**:
+    - Parse and validate the incoming energy reading data.
+    - Save the reading to the MySQL database.
+    - Handle different transaction types and adjust `energyType` if necessary.
+    - Return a success or error message based on the operation outcome.
+
+- **GET `/api/energy/netDifference`**:
+    - Validate the month parameter.
+    - Query the database for total generated and used energy for the specified month.
+    - Calculate the net energy difference.
+    - Return the result in a user-friendly format.
+
+### Acceptance Criteria
+
+**POST `/api/energy/meterReading`**
+- **Valid Input**: The system successfully saves the reading and returns a confirmation message.
+- **Invalid Input**: The system returns a 400 Bad Request error with a message indicating the issue (e.g., invalid transaction type).
+
+**GET `/api/energy/netDifference`**
+- **Valid Month**: The system returns the net energy difference for the specified month in a readable format.
+- **Invalid Month**: The system returns a 400 Bad Request error with a message indicating that the month is out of range.
+
+### Testing Considerations
+
+**Completed Tests**
+1. **Unit Testing**:
+    - Tested the EnergyController methods using JUnit and Mockito to ensure correct handling of valid and invalid inputs.
+    - Mocked the EnergyRepository to verify the behavior of the service layer.
+
+2. **Integration Testing**:
+    - Used RestAssured to test API endpoints.
+    - Verified that the endpoints correctly interacted with the MySQL database and returned expected results.
+
+3. **Error Handling**:
+    - Validated that the system handles and logs errors appropriately.
+    - Checked that error responses are meaningful and user-friendly.
+
+**Future Testing Recommendations**
+1. **Boundary and Edge Case Testing**:
+    - Test edge cases such as the first and last days of the month to ensure accurate data handling.
+
+2. **Comprehensive Integration Testing**:
+    - Conduct more extensive integration tests to cover all possible interaction scenarios between the API and the database.
+
+3. **Performance and Load Testing**:
+    - Assess the system's performance under high loads and with large datasets to ensure responsiveness and efficiency.
+
+4. **Security and Vulnerability Testing**:
+    - Execute security tests to identify and mitigate potential vulnerabilities, including authentication and authorisation mechanisms.
+
+### Dependencies
+
+- **Spring Boot**: For developing the RESTful API.
+- **Spring Data JPA**: For database interaction.
+- **MySQL**: Database for storing energy transactions.
+- **Swagger (OpenAPI)**: For API documentation and testing.
+- **JUnit and Mockito**: For unit testing.
+- **RestAssured**: For integration testing.
+
+### Project-Related Tickets
+
+- Design and document the MySQL database schema for energy transactions.
+- Set up and document the database connection settings in application.yml
+- Implement Energy entity and repository.
+- Develop POST `/api/energy/meterReading` endpoint.
+- Implement GET `/api/energy/netDifference` endpoint.
+- Add unit tests for EnergyController using JUnit and Mockito.
+- Add integration tests for API endpoints using RestAssured.
+
+### Task Delegation
+
+**1. Backend Development**
+- **API Development**:
+    - Implemented necessary endpoints for energy data transactions.
+    - Developed methods for calculating net energy differences and handling energy data.
+- **Database Management**:
+    - Designed and maintained the MySQL database schema.
+    - Implemented the EnergyRepository for data persistence.
+
+**2. Testing**
+- **Unit Testing**:
+    - Focused on individual components and methods, ensuring expected functionality.
+- **Integration Testing**:
+    - Verified the correct interaction between API endpoints and the MySQL database.
+- **Error Handling and Edge Cases**:
+    - Tested robustness in handling invalid inputs and edge cases.
+
+**3. Project Management**
+- **Task Coordination**:
+    - Assigned tasks based on team member preferences and workload.
+- **Timeline Management**:
+    - Ensured project adherence to schedule and deadlines.
+- **Code Reviews**:
+    - Conducted code reviews and Zoom/Slack meetings to maintain code quality and consistency.
+
+**4. Documentation**
+- **Swagger (OpenAPI)**:
+    - Provided clear and comprehensive API documentation.
+- **Project Structure and User Stories**:
+    - Documented overall project structure, user stories, and acceptance criteria.
+- **README File**:
+    - Developed and maintained a README file with project instructions and information.
+
+### Notes/Questions
+
+Given the small project size and tight deadline, the following considerations may be addressed in future iterations or as the project evolves:
+1. **Date Handling**:
+    - How should date ranges be managed for calculating monthly energy differences? Are specific time zones required?
+2. **Transaction Types**:
+    - Are additional transaction types or details needed in the future?
+3. **Data Accuracy**:
+    - How will the system ensure the accuracy and integrity of the submitted energy data?
+4. **User Authentication**:
+    - Will user authentication and authorisation be needed in the future? If so, what methods should be used?
