@@ -94,7 +94,7 @@ public class EnergyController {
             }
             // Calculate the net energy difference
             double netEnergyDifference = totalGenerated - totalUsed;
-            // This method is  for rounding the net energy difference calculation.
+            // This method is  for rounding the net energy difference calculation to make it more readable.
             long roundedNetEnergyDifference = Math.round(netEnergyDifference);
 
             // A method to get the month's name based on the month number to improve readability for user.
