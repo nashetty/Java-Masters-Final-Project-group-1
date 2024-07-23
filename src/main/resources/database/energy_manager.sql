@@ -1,4 +1,4 @@
--- DROP DATABASE energy_manager;
+DROP DATABASE energy_manager;
 CREATE DATABASE energy_manager;
 
 USE energy_manager;
@@ -6,9 +6,9 @@ USE energy_manager;
 CREATE TABLE energy (
     id INT AUTO_INCREMENT PRIMARY KEY,
     transaction_type ENUM('generated', 'used') NOT NULL,
-    energy_type VARCHAR(50),
-    amount_K_W decimal(5,2),
-    transaction_date DATE  -- format YYYY-MM-DD
+    energy_type VARCHAR(50) NOT NULL,
+    amount_k_W_h decimal(5,2) NOT NULL,
+    transaction_date DATE NOT NULL  -- format YYYY-MM-DD
 );
 
 -- set energyType to N/A when transactionType is 'used' as it does not
@@ -25,7 +25,7 @@ END;
 DELIMITER ;
 
 INSERT INTO energy
-(transaction_type, energy_type, amount_K_W, transaction_date)
+(transaction_type, energy_type, amount_k_W_h, transaction_date)
 VALUES
 -- January 2024
 ('generated', 'solar', 4.2, '2024-01-01'),
@@ -86,9 +86,9 @@ VALUES
 SELECT * FROM energy;
 
 -- all transactions (for all dates) filtered by transaction type
-SELECT SUM(amount_K_W) AS total_kW, transaction_type FROM energy WHERE transaction_type = 'used';
-SELECT SUM(amount_K_W) AS total_kW, transaction_type FROM energy WHERE transaction_type = 'generated';
-SELECT SUM(amount_K_W) AS total_kW, transaction_type FROM energy GROUP BY transaction_type;
+SELECT SUM(amount_k_W_h) AS total_kWh, transaction_type FROM energy WHERE transaction_type = 'used';
+SELECT SUM(amount_k_W_h) AS total_kWh, transaction_type FROM energy WHERE transaction_type = 'generated';
+SELECT SUM(amount_k_W_h) AS total_kWh, transaction_type FROM energy GROUP BY transaction_type;
 
 -- transactions filtered by transaction type and by month
-SELECT SUM(amount_K_W) AS total_kW, transaction_type, MONTH(transaction_date) AS Month FROM energy GROUP BY transaction_type, Month;
+SELECT SUM(amount_k_W_h) AS total_kWh, transaction_type, MONTH(transaction_date) AS Month FROM energy GROUP BY transaction_type, Month;
