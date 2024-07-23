@@ -33,12 +33,12 @@ This project implements a RESTful API for managing and tracking energy transacti
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/GreenEnergyManager.git
-   cd GreenEnergyManager
+   git clone https://github.com/nashetty/Java-Masters-Final-Project-group-1.git
+   cd Java-Masters-Final-Project-group-1
    ```
 2. **Configure and seed the database:**  
    Ensure you have MySQL installed locally. Before running the project, you need to create the database and required
-   tables by executing the `nergy_manager.sql` script in MySQL Workbench or any other MySQL client of your choice. This file
+   tables by executing the `energy_manager.sql` script in MySQL Workbench or any other MySQL client of your choice. This file
    can be found in the `src/main/resources/database` folder of this project.  
    <br>
    Update the database configuration parameters in the application.yml file with your MySQL credentials.
@@ -64,7 +64,7 @@ This project implements a RESTful API for managing and tracking energy transacti
 > Note: You should never commit your application.yml file, as it contains sensitive information that should be kept
 private.
 
-3. **Open the project in IntelliJ and run **`GreenEnergyManagerApplication.java`.**  
+3. **Open the project in IntelliJ and run `GreenEnergyManagerApplication.java`.**  
 
 
 4. **Run tests:**   
@@ -144,8 +144,8 @@ graph TD;
     A --> |POST| B1
     A --> |GET| B2
 
-    B1 --> |save energyInfo| D1
-    B2 --> |findTotalMonthlyEnergy| D1
+    B1 --> |postNewEnergyReading| D1
+    B2 --> |netEnergyDifferenceCalculation| D1
 
 ```
 User interacts with Application through API calls (GET, POST).
@@ -158,6 +158,12 @@ code organization.
 
 This project demonstrates the implementation of a RESTful API using Spring Boot and the usage of JpaRepository 
 for database interactions.
+
+Due to the project's small scale and time constraints, we prioritized development speed and simplicity over strict 
+adherence to best practices. We understand that controllers should primarily handle HTTP requests and delegate
+complex logic to service or utility components, which enhances code maintainability and readability. As the project 
+scales, we will prioritize this separation to improve the overall structure and quality of the codebase.  
+
 
 ### Acknowledgments
 Final project for the CFG +Masters Java Course, by Amal, China and Nadia
