@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
-public class EnergyControllerEndpointTest {
+public class EnergyControllerTest {
 
     @Mock
     private EnergyRepository energyRepository;
