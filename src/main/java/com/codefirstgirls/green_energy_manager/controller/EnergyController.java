@@ -4,8 +4,6 @@ import com.codefirstgirls.green_energy_manager.model.entity.Energy;
 import com.codefirstgirls.green_energy_manager.model.entity.TransactionType;
 import com.codefirstgirls.green_energy_manager.model.repository.EnergyRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Nullable;
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,8 +25,7 @@ public class EnergyController {
 
 // Post request for users to send in their meter readings
     @PostMapping("/meterReading")
-//    @Nullable used to eliminate NullPointerExceptions before it won't be accepted by sql database.
-    public ResponseEntity<String> postNewEnergyReading(@Nullable @RequestBody Energy energyInfo){
+    public ResponseEntity<String> postNewEnergyReading( @RequestBody Energy energyInfo){
         try{
             // Check if energyInfo and its fields are valid
             if (energyInfo == null ) {
@@ -64,7 +61,7 @@ public class EnergyController {
                    log.error("Invalid transaction type: " + energyInfo.getTransactionType());
                    return ResponseEntity.badRequest().body("Invalid transaction type.");
            }
-            return ResponseEntity.ok("New energy reading added" + submitEnergy);
+            return ResponseEntity.ok("New energy reading added: \n" + submitEnergy.toString());
         }
         catch (IllegalArgumentException e) {
             assert energyInfo != null;
