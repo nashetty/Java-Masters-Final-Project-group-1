@@ -106,6 +106,68 @@ public class EnergyControllerGetEndpointTest {
         log.info("netEnergyDifferenceCalculation_emptyData test passed.");
     }
 
+
+    // Now use RestAssured tests to simulate the actual HTTP requests to the get endpoint.
+
+    @Test
+    public void getNetMonthlyEnergyDifference_calledWithValidMonth() {
+        RestAssuredMockMvc.standaloneSetup(energyController);
+
+        int month = 4;
+
+
+        List<Object[]> monthlyTotals = new ArrayList<>();
+        monthlyTotals.add(new Object[]{"generated", 17.5});
+        monthlyTotals.add(new Object[]{"used", 10.0});
+
+        when(energyRepository.findTotalMonthlyEnergy(month)).thenReturn(monthlyTotals);
+
+        RestAssuredMockMvc
+                .given()
+                .when()
+                .get("/api/energy/netDifference?month=" + month)
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("netEnergyDifference", equalTo("Net Energy Difference for APRIL is: 8 kWh"));
+    }
+
+    @Test
+    public void getNetMonthlyEnergyDifference_calledWithInvalidMonth() {
+        RestAssuredMockMvc.standaloneSetup(energyController);
+
+        int invalidMonth = 13;
+
+        RestAssuredMockMvc
+                .given()
+                .when()
+                .get("/api/energy/netDifference?month=" + invalidMonth)
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body("error", equalTo("Invalid month. Please provide a month value between 1 and 12."));
+    }
+
+    @Test
+    public void getNetMonthlyEnergyDifference_calledWithEmptyData() {
+        RestAssuredMockMvc.standaloneSetup(energyController);
+
+        int month = 8;
+
+
+        when(energyRepository.findTotalMonthlyEnergy(month)).thenReturn(new ArrayList<>());
+
+        RestAssuredMockMvc
+                .given()
+                .when()
+                .get("/api/energy/netDifference?month=" + month)
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("netEnergyDifference", equalTo("Net Energy Difference for AUGUST is: 0 kWh"));
+    }
+
+
+
+
+
     @Test
     public void postReading_calledWithEnergyClass_forGenerated(){
         RestAssuredMockMvc.standaloneSetup(energyController);
