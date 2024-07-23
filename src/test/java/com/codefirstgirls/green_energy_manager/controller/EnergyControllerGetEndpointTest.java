@@ -129,7 +129,7 @@ public class EnergyControllerGetEndpointTest {
                 .statusCode(HttpStatus.OK.value())
 //                for checking
 //                    .log().all();
-                .body(equalTo("New energy reading added" + meterReading));
+                .body(equalTo("New energy reading added: \n" + meterReading.toString()));
 
     }
 
@@ -156,7 +156,7 @@ public class EnergyControllerGetEndpointTest {
                 .statusCode(HttpStatus.OK.value())
 //                for checking
 //                    .log().all();
-                .body(equalTo("New energy reading added" + meterReading));
+                .body(equalTo("New energy reading added: \n" + meterReading.toString()));
 
     }
 
@@ -216,14 +216,47 @@ public class EnergyControllerGetEndpointTest {
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
     }
-
-    //    because transaction type is the only not null
+    @Test
     public void postReading_calledWithMissingTransactionType_ReturnBadRequest() {
         RestAssuredMockMvc.standaloneSetup(energyController);
         Energy meterReading = new Energy();
         meterReading.setEnergyType("solar");
         meterReading.setAmountKWh(BigDecimal.valueOf(50.1));
         meterReading.setTransactionDate(new Date());
+
+        RestAssuredMockMvc
+                .given()
+                .contentType("application/json")
+                .body(meterReading)
+                .when()
+                .post("/api/energy/meterReading")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    public void postReading_calledWithMissingAmountKWh_ReturnBadRequest() {
+        RestAssuredMockMvc.standaloneSetup(energyController);
+        Energy meterReading = new Energy();
+        meterReading.setEnergyType("solar");
+        meterReading.setTransactionDate(new Date());
+
+        RestAssuredMockMvc
+                .given()
+                .contentType("application/json")
+                .body(meterReading)
+                .when()
+                .post("/api/energy/meterReading")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    public void postReading_calledWithMissingTransactionDate_ReturnBadRequest() {
+        RestAssuredMockMvc.standaloneSetup(energyController);
+        Energy meterReading = new Energy();
+        meterReading.setEnergyType("solar");
+        meterReading.setAmountKWh(BigDecimal.valueOf(50.1));
 
         RestAssuredMockMvc
                 .given()
