@@ -112,7 +112,7 @@ public class EnergyControllerGetEndpointTest {
         Energy meterReading = new Energy();
         meterReading.setTransactionType("GENERATED");
         meterReading.setEnergyType("solar");
-        meterReading.setAmountKW(BigDecimal.valueOf(50.1));
+        meterReading.setAmountKWh(BigDecimal.valueOf(50.1));
         meterReading.setTransactionDate(new Date());
 
         // tried to use the save, by had to use any due to the dynamic nature of the transactionDate
@@ -139,7 +139,7 @@ public class EnergyControllerGetEndpointTest {
         Energy meterReading = new Energy();
         meterReading.setTransactionType("USED");
         meterReading.setEnergyType("wind");
-        meterReading.setAmountKW(BigDecimal.valueOf(48.1));
+        meterReading.setAmountKWh(BigDecimal.valueOf(48.1));
         meterReading.setTransactionDate(new Date());
 
         // tried to use the save, by had to use any due to the dynamic nature of the transactionDate
@@ -166,7 +166,7 @@ public class EnergyControllerGetEndpointTest {
         Energy meterReading = new Energy();
         meterReading.setTransactionType("NOTVALID");
         meterReading.setEnergyType("wind");
-        meterReading.setAmountKW(BigDecimal.valueOf(48.1));
+        meterReading.setAmountKWh(BigDecimal.valueOf(48.1));
         meterReading.setTransactionDate(new Date());
 
 
@@ -187,7 +187,7 @@ public class EnergyControllerGetEndpointTest {
         Energy meterReading = new Energy();
         meterReading.setTransactionType("GENERATED");
         meterReading.setEnergyType("wind");
-        meterReading.setAmountKW(BigDecimal.valueOf(48.1));
+        meterReading.setAmountKWh(BigDecimal.valueOf(48.1));
         meterReading.setTransactionDate(new Date());
 
 
@@ -222,7 +222,7 @@ public class EnergyControllerGetEndpointTest {
         RestAssuredMockMvc.standaloneSetup(energyController);
         Energy meterReading = new Energy();
         meterReading.setEnergyType("solar");
-        meterReading.setAmountKW(BigDecimal.valueOf(50.1));
+        meterReading.setAmountKWh(BigDecimal.valueOf(50.1));
         meterReading.setTransactionDate(new Date());
 
         RestAssuredMockMvc
