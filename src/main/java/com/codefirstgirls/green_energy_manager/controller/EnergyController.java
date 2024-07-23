@@ -25,8 +25,22 @@ public class EnergyController {
 
 // Post request for users to send in their meter readings
     @PostMapping("/meterReading")
-    public ResponseEntity<String> postNewEnergyReading(@RequestBody Energy energyInfo){
+    public ResponseEntity<String> postNewEnergyReading( @RequestBody Energy energyInfo){
         try{
+            // Check if energyInfo and its fields are valid
+            if (energyInfo == null ) {
+                return ResponseEntity.badRequest().body("Energy information is required.");
+            }
+            if (energyInfo.getTransactionType() == null || energyInfo.getTransactionType().isEmpty()) {
+                return ResponseEntity.badRequest().body("Transaction type is required.");
+            }
+            if (energyInfo.getAmountKWh() == null) {
+                return ResponseEntity.badRequest().body("Amount of energy in KW/h is required.");
+            }
+
+            if (energyInfo.getTransactionDate() == null) {
+                return ResponseEntity.badRequest().body("Valid date in format YYYY-MM-DD is required.");
+            }
 //            assign energy variable outside of scope to be used in the switch
             Energy submitEnergy;
 //            get the enum of transactionType and make to uppercase as uppercase is in the transactionType enum class
@@ -38,16 +52,22 @@ public class EnergyController {
                case USED:
                    log.info("Used energy recorded.");
                    // Set energy type to 'N/A' for used transactions
-                   energyInfo.setEnergyType("N/A");
+                   if(energyInfo.getEnergyType() == null ||energyInfo.getEnergyType().isEmpty()){
+                       energyInfo.setEnergyType("N/A");
+                   }
                    submitEnergy = energyRepository.save(energyInfo);
                    break;
                default:
+                   log.error("Invalid transaction type: " + energyInfo.getTransactionType());
                    return ResponseEntity.badRequest().body("Invalid transaction type.");
            }
-            return ResponseEntity.ok("New energy reading added" + submitEnergy);
-
+            return ResponseEntity.ok("New energy reading added: \n" + submitEnergy.toString());
         }
-        catch(Exception e){
+        catch (IllegalArgumentException e) {
+            assert energyInfo != null;
+            log.error("Invalid transaction type provided: " + energyInfo.getTransactionType(), e);
+            return ResponseEntity.badRequest().body("Invalid transaction type.");
+        } catch(Exception e){
             log.error("Error adding new reading to your profile!");
             log.error(e.getMessage());
             return ResponseEntity.badRequest().body("Failed to add the new energy reading submission." + e.getMessage());

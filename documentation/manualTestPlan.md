@@ -247,3 +247,19 @@ This document outlines the steps for manually testing the EnergyController in th
  > 400
 - Response body: 
  > {"error": "Amount of energy cannot be negative"}`
+
+### Test Posting Energy Reading with Invalid Date Format
+**Objective**: Verify that the endpoint rejects invalid date formats.
+
+**Steps**:
+
+1. Use Postman to send a POST request with an incorrectly formatted transactionDate.
+2. Verify that the system returns a 400 Bad Request response with an appropriate error message.
+
+**Expected Result:**
+
+- Status code:
+> 400
+
+- Response body:
+> {"error": "Invalid date format"}
