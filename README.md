@@ -15,16 +15,20 @@
 - [Notes to Marker](#notes-to-marker)
 - [Acknowledgments](#acknowledgments)
 
+
+- [Manual Test Plan](./documentation/manualTestPlan.md)
+- [Project Requirements](./documentation/projectRequirements.md)
+
 ### Introduction
 
 This project implements a RESTful API for managing and tracking energy transactions (used and produced). The API is developed using Spring Boot and provides endpoints to submit meter readings and calculate net energy differences for specified months.
 
 ### API Endpoints
 
-| Method | Path                          | Query Parameters | Body of Request                                                                 | Result                            | Status Code | Response                                                                                             |
-|--------|-------------------------------|------------------|---------------------------------------------------------------------------------|-----------------------------------|-------------|------------------------------------------------------------------------------------------------------|
-| POST   | /api/energy/meterReading      |                  | {"transactionType": string(required), "energyType": string, "amountKW": number, "transactionDate": date} | create new energy reading         | 200         | "New energy reading added" or error message                                                           |
-| GET    | /api/energy/netDifference     | month=int        |                                                                                 | calculate net energy difference   | 200         | {"netEnergyDifference": "Net Energy Difference for {month} is: {value} kWh"} or error message       |
+| Method | Path                          | Query Parameters | Body of Request                                                                                                                                                      | Result                            | Status Code | Response                                                                                             |
+|--------|-------------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|-------------|------------------------------------------------------------------------------------------------------|
+| POST   | /api/energy/meterReading      |                  | {"transactionType": string(required), "energyType": string(required for GENERATED transactionType), "amountKW": number(required), "transactionDate": date(required)} | create new energy reading         | 200         | "New energy reading added" or error message                                                           |
+| GET    | /api/energy/netDifference     | month=int        |                                                                                                                                                                      | calculate net energy difference   | 200         | {"netEnergyDifference": "Net Energy Difference for {month} is: {value} kWh"} or error message       |
 
 > Note: The POST method requires `transactionType` to be either `GENERATED` or `USED`.
 
@@ -88,6 +92,10 @@ Green Energy Manager
 green_energy_manager
 │
 ├── .mvn/
+├── documentation/
+│   ├── manualTestPlan.md
+│   ├── projectRequirements.md
+│ 
 ├── src/
 │   ├── main/
 │   │    ├── java/
@@ -106,6 +114,9 @@ green_energy_manager
 │   │    │          ├── GreenEnergyManagerApplication.java
 │   │    │ 
 │   │    ├── resources/   
+│   │         ├──database/
+│   │         │   ├──energy_manafger.sql
+│   │         │
 │   │         ├── application.yml.example    
 │   │      
 │   ├── test/java/com.codefirstgirls.green_energy_manager
@@ -141,11 +152,11 @@ graph TD;
         D1[Database]
     end
 
-    A --> |POST| B1
-    A --> |GET| B2
+    A <--> |POST| B1
+    A <--> |GET| B2
 
-    B1 --> |postNewEnergyReading| D1
-    B2 --> |netEnergyDifferenceCalculation| D1
+    B1 <--> |postNewEnergyReading| D1
+    B2 <--> |netEnergyDifferenceCalculation| D1
 
 ```
 User interacts with Application through API calls (GET, POST).
