@@ -12,7 +12,7 @@ services:
 
   green-energy-manager:
     # please change the below value to the sha256 img hash for green-energy-manager from docker desktop
-    image: ab98ed1e5def252ce92047df6f45b00ab3e362d8b7c930aecbbe411ee0498268
+    image: cf59f28f522f010840111fff9054b7c9f1365be5f1b8e20b60be8227ba61ee01
     ports:
       - "8080:8080"
     environment:

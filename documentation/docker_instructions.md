@@ -43,4 +43,7 @@ This usually fixes the issue.
 in the browser or in Postman.
 
 
-9. **Clean up** - At the end, run **docker-compose down** to clean up the services.
+9. **Clean up** - At the end, run to clean up the services:
+   ```bash
+   docker-compose down
+   ```
