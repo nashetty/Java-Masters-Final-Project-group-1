@@ -28,7 +28,7 @@ public class Energy {
     @Column(name="energy_type")
     private String energyType;
 
-    @Column(name="amount_K_W")
+    @Column(name="amount_k_W_h")
 //    changed from double to BigDecimal to match sql database
     private BigDecimal amountKW;
 
