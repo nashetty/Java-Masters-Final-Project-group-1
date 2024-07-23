@@ -15,6 +15,10 @@
 - [Notes to Marker](#notes-to-marker)
 - [Acknowledgments](#acknowledgments)
 
+
+- [Manual Test Plan](./documentation/manualTestPlan.md)
+- [Project Requirements](./documentation/projectRequirements.md)
+
 ### Introduction
 
 This project implements a RESTful API for managing and tracking energy transactions (used and produced). The API is developed using Spring Boot and provides endpoints to submit meter readings and calculate net energy differences for specified months.
@@ -88,6 +92,10 @@ Green Energy Manager
 green_energy_manager
 │
 ├── .mvn/
+├── documentation/
+│   ├── manualTestPlan.md
+│   ├── projectRequirements.md
+│ 
 ├── src/
 │   ├── main/
 │   │    ├── java/
@@ -106,6 +114,9 @@ green_energy_manager
 │   │    │          ├── GreenEnergyManagerApplication.java
 │   │    │ 
 │   │    ├── resources/   
+│   │         ├──database/
+│   │         │   ├──energy_manafger.sql
+│   │         │
 │   │         ├── application.yml.example    
 │   │      
 │   ├── test/java/com.codefirstgirls.green_energy_manager
@@ -141,11 +152,11 @@ graph TD;
         D1[Database]
     end
 
-    A --> |POST| B1
-    A --> |GET| B2
+    A <--> |POST| B1
+    A <--> |GET| B2
 
-    B1 --> |postNewEnergyReading| D1
-    B2 --> |netEnergyDifferenceCalculation| D1
+    B1 <--> |postNewEnergyReading| D1
+    B2 <--> |netEnergyDifferenceCalculation| D1
 
 ```
 User interacts with Application through API calls (GET, POST).
