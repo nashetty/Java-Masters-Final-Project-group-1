@@ -115,7 +115,7 @@ green_energy_manager
 │   │    │ 
 │   │    ├── resources/   
 │   │         ├──database/
-│   │         │   ├──energy_manafger.sql
+│   │         │   ├──energy_manager.sql
 │   │         │
 │   │         ├── application.yml.example    
 │   │      
@@ -165,15 +165,15 @@ Application interacts with Database to retrieve or store data (like retrieving t
 ### Notes to Marker
 The project focuses on the core functionalities of recording energy transactions and calculating net energy differences. 
 Future improvements could include enhanced validation, additional utility methods, and further refactoring for better 
-code organization.
+code organisation.
 
 This project demonstrates the implementation of a RESTful API using Spring Boot and the usage of JpaRepository 
 for database interactions.
 
-Due to the project's small scale and time constraints, we prioritized development speed and simplicity over strict 
+Due to the project's small scale and time constraints, we prioritised development speed and simplicity over strict 
 adherence to best practices. We understand that controllers should primarily handle HTTP requests and delegate
 complex logic to service or utility components, which enhances code maintainability and readability. As the project 
-scales, we will prioritize this separation to improve the overall structure and quality of the codebase.  
+scales, we will prioritise this separation to improve the overall structure and quality of the codebase.  
 
 
 ### Acknowledgments
