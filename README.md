@@ -25,10 +25,10 @@ This project implements a RESTful API for managing and tracking energy transacti
 
 ### API Endpoints
 
-| Method | Path                          | Query Parameters | Body of Request                                                                 | Result                            | Status Code | Response                                                                                             |
-|--------|-------------------------------|------------------|---------------------------------------------------------------------------------|-----------------------------------|-------------|------------------------------------------------------------------------------------------------------|
-| POST   | /api/energy/meterReading      |                  | {"transactionType": string(required), "energyType": string, "amountKW": number, "transactionDate": date} | create new energy reading         | 200         | "New energy reading added" or error message                                                           |
-| GET    | /api/energy/netDifference     | month=int        |                                                                                 | calculate net energy difference   | 200         | {"netEnergyDifference": "Net Energy Difference for {month} is: {value} kWh"} or error message       |
+| Method | Path                          | Query Parameters | Body of Request                                                                                                                                                      | Result                            | Status Code | Response                                                                                             |
+|--------|-------------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|-------------|------------------------------------------------------------------------------------------------------|
+| POST   | /api/energy/meterReading      |                  | {"transactionType": string(required), "energyType": string(required for GENERATED transactionType), "amountKW": number(required), "transactionDate": date(required)} | create new energy reading         | 200         | "New energy reading added" or error message                                                           |
+| GET    | /api/energy/netDifference     | month=int        |                                                                                                                                                                      | calculate net energy difference   | 200         | {"netEnergyDifference": "Net Energy Difference for {month} is: {value} kWh"} or error message       |
 
 > Note: The POST method requires `transactionType` to be either `GENERATED` or `USED`.
 
