@@ -1,5 +1,22 @@
 # Project Requirements
 
+## Green Energy Manager
+
+### Table of Contents
+
+* [Project Overview](#project-overview)
+* [Project Requirements](#project-requirements-1)
+    + [User Stories](#user-stories)
+    + [Implementation](#implementation)
+    + [Acceptance Criteria](#acceptance-criteria)
+    + [Testing Considerations](#testing-considerations)
+    + [Dependencies ](#dependencies)
+    + [Development Tools](#development-tools)
+    + [Technologies](#technologies)
+    + [Project-Related Tickets](#project-related-tickets)
+    + [Task Delegation](#task-delegation)
+    + [Notes/Questions](#notesquestions)
+
 ## Project Overview
 
 **What is the Project?**
