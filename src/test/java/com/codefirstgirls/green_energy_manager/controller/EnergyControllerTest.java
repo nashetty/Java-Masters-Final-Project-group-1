@@ -147,6 +147,23 @@ public class EnergyControllerTest {
     }
 
     @Test
+    public void getNetMonthlyEnergyDifference_calledWithInvalidMonthAsString_returnsBadRequest() {
+        RestAssuredMockMvc.standaloneSetup(energyController);
+
+        String invalidMonth = "January";
+        String expectedErrorMessage = "Invalid parameter type. Please provide a valid month value as an integer.";
+
+        RestAssuredMockMvc
+                .given()
+                .param("month", invalidMonth)
+                .when()
+                .get("/api/energy/netDifference")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body("error", equalTo(expectedErrorMessage));
+    }
+
+    @Test
     public void getNetMonthlyEnergyDifference_calledWithEmptyData() {
         RestAssuredMockMvc.standaloneSetup(energyController);
 
