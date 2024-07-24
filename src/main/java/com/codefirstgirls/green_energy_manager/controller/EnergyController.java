@@ -73,7 +73,7 @@ public class EnergyController {
         } catch (Exception e) {
             log.error("Error adding new reading to your profile!");
             log.error(e.getMessage());
-            return ResponseEntity.badRequest().body("Failed to add the new energy reading submission." + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error occurred. Please try again later.");
         }
     }
 

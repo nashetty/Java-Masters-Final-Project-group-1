@@ -261,7 +261,7 @@ public class EnergyControllerTest {
     }
 
     @Test
-    public void postReading_calledWithEnergyClass_ReturnBadRequest() throws Exception {
+    public void postReading_calledWithEnergyClass_ReturnsInternalServerError() throws Exception {
         RestAssuredMockMvc.standaloneSetup(energyController);
         Energy meterReading = new Energy();
         meterReading.setTransactionType("GENERATED");
@@ -279,7 +279,7 @@ public class EnergyControllerTest {
                 .when()
                 .post("/api/energy/meterReading")
                 .then()
-                .statusCode(HttpStatus.BAD_REQUEST.value());
+                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
 
     }
 
