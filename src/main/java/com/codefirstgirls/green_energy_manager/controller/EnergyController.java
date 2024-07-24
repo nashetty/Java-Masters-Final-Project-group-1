@@ -30,16 +30,20 @@ public class EnergyController {
         try {
             // Check if energyInfo and its fields are valid
             if (energyInfo == null) {
+                log.error("Energy information is required.");
                 return ResponseEntity.badRequest().body("Energy information is required.");
             }
             if (energyInfo.getTransactionType() == null || energyInfo.getTransactionType().isEmpty()) {
+                log.error("Transaction information is required.");
                 return ResponseEntity.badRequest().body("Transaction type is required.");
             }
             if (energyInfo.getAmountKWh() == null) {
+                log.error("Amount of energy in KW/h is required.");
                 return ResponseEntity.badRequest().body("Amount of energy in KW/h is required.");
             }
 
             if (energyInfo.getTransactionDate() == null) {
+                log.error("Valid date in format YYYY-MM-DD is required.");
                 return ResponseEntity.badRequest().body("Valid date in format YYYY-MM-DD is required.");
             }
 //            assign energy variable outside of scope to be used in the switch
@@ -47,24 +51,27 @@ public class EnergyController {
 //            get the enum of transactionType and make to uppercase as uppercase is in the transactionType enum class
             switch (TransactionType.valueOf(energyInfo.getTransactionType().toUpperCase())) {
                 case GENERATED:
-                    log.info("Generated energy recorded.");
+                    log.info("Generated energy selected.");
                     if (energyInfo.getEnergyType() == null || energyInfo.getEnergyType().isEmpty()) {
                         return ResponseEntity.badRequest().body("A energy type is required for generated energy.");
                     }
                     submitEnergy = energyRepository.save(energyInfo);
+                    log.info("Generated energy recorded.");
                     break;
                 case USED:
-                    log.info("Used energy recorded.");
+                    log.info("Used energy selected.");
                     // Set energy type to 'N/A' for used transactions
                     if (energyInfo.getEnergyType() == null || energyInfo.getEnergyType().isEmpty()) {
                         energyInfo.setEnergyType("N/A");
                     }
                     submitEnergy = energyRepository.save(energyInfo);
+                    log.info("Used energy correctly recorded");
                     break;
                 default:
                     log.error("Invalid transaction type: " + energyInfo.getTransactionType());
                     return ResponseEntity.badRequest().body("Invalid transaction type.");
             }
+            log.info("New energy reading added:" + submitEnergy);
             return ResponseEntity.ok("New energy reading added: \n" + submitEnergy.toString());
         } catch (IllegalArgumentException e) {
             assert energyInfo != null;
