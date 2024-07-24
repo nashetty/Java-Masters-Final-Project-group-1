@@ -115,7 +115,6 @@ public class EnergyControllerTest {
 
         int month = 4;
 
-
         List<Object[]> monthlyTotals = new ArrayList<>();
         monthlyTotals.add(new Object[]{"generated", 17.5});
         monthlyTotals.add(new Object[]{"used", 10.0});
@@ -124,8 +123,9 @@ public class EnergyControllerTest {
 
         RestAssuredMockMvc
                 .given()
+                .param("month", month)
                 .when()
-                .get("/api/energy/netDifference?month=" + month)
+                .get("/api/energy/netDifference")
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .body("netEnergyDifference", equalTo("Net Energy Difference for APRIL is: 8 kWh"));
@@ -139,12 +139,14 @@ public class EnergyControllerTest {
 
         RestAssuredMockMvc
                 .given()
+                .param("month", invalidMonth)
                 .when()
-                .get("/api/energy/netDifference?month=" + invalidMonth)
+                .get("/api/energy/netDifference")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("error", equalTo("Invalid month. Please provide a month value between 1 and 12."));
     }
+
 
     @Test
     public void getNetMonthlyEnergyDifference_calledWithInvalidMonthAsString_returnsBadRequest() {
@@ -169,17 +171,18 @@ public class EnergyControllerTest {
 
         int month = 8;
 
-
         when(energyRepository.findTotalMonthlyEnergy(month)).thenReturn(new ArrayList<>());
 
         RestAssuredMockMvc
                 .given()
+                .param("month", month)
                 .when()
-                .get("/api/energy/netDifference?month=" + month)
+                .get("/api/energy/netDifference")
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .body("netEnergyDifference", equalTo("Net Energy Difference for AUGUST is: 0 kWh"));
     }
+
 
 
 
