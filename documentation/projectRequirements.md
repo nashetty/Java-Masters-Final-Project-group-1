@@ -93,7 +93,7 @@ The backend is built using Spring Boot and connects to a MySQL database.
 4. **Security and Vulnerability Testing**:
     - Execute security tests to identify and mitigate potential vulnerabilities, including authentication and authorisation mechanisms.
 
-### Dependencies
+### Dependencies 
 
 - **Spring Boot**: For developing the RESTful API.
 - **Spring Data JPA**: For database interaction.
@@ -101,6 +101,14 @@ The backend is built using Spring Boot and connects to a MySQL database.
 - **Swagger (OpenAPI)**: For API documentation and testing.
 - **JUnit and Mockito**: For unit testing.
 - **RestAssured**: For integration testing.
+
+### Technologies
+
+**Backend**: Spring Boot
+**Database**: MySQL
+**Testing**: JUnit, Mockito, RestAssured
+**Containerisation**: Docker
+
 
 ### Project-Related Tickets
 
@@ -111,6 +119,8 @@ The backend is built using Spring Boot and connects to a MySQL database.
 - Implement GET `/api/energy/netDifference` endpoint.
 - Add unit tests for EnergyController using JUnit and Mockito.
 - Add integration tests for API endpoints using RestAssured.
+- Containerise the project using Docker. 
+- Finalise project documentations.
 
 ### Task Delegation
 
@@ -136,15 +146,17 @@ The backend is built using Spring Boot and connects to a MySQL database.
 - **Timeline Management**:
     - Ensured project adherence to schedule and deadlines.
 - **Code Reviews**:
-    - Conducted code reviews and Zoom/Slack meetings to maintain code quality and consistency.
+    - Conducted regular code reviews and Zoom/Slack meetings to maintain code quality and consistency.
 
 **4. Documentation**
 - **Swagger (OpenAPI)**:
     - Provided clear and comprehensive API documentation.
-- **Project Structure and User Stories**:
-    - Documented overall project structure, user stories, and acceptance criteria.
+- **projectRequirments.md**:
+    - Documented overall project overview and structure, user stories, and acceptance criteria.
 - **README File**:
     - Developed and maintained a README file with project instructions and information.
+  - **deploymentPlan.md**:
+    - Provided detailed instructions for deploying the Green Energy Manager application and pipeline stages.
 
 ### Notes/Questions
 
