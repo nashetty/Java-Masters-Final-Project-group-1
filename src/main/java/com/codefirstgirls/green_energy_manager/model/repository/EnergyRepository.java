@@ -11,7 +11,7 @@ public interface EnergyRepository extends JpaRepository<Energy, Integer> {
 
      // query method to get the total energy transactions per month, grouped by transaction type.
 
-    @Query("SELECT e.transactionType, SUM(e.amountKW), MONTH(e.transactionDate) FROM Energy e WHERE MONTH(e.transactionDate) = :month GROUP BY e.transactionType, MONTH(e.transactionDate)")
+    @Query("SELECT e.transactionType, SUM(e.amountKWh), MONTH(e.transactionDate) FROM Energy e WHERE MONTH(e.transactionDate) = :month GROUP BY e.transactionType, MONTH(e.transactionDate)")
     List<Object[]> findTotalMonthlyEnergy(@Param("month") int month);
 }
 
