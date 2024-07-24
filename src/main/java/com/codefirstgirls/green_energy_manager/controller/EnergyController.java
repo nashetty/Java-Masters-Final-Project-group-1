@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.Month;
 import java.util.HashMap;
@@ -23,12 +24,12 @@ public class EnergyController {
     @Autowired
     private EnergyRepository energyRepository;
 
-// Post request for users to send in their meter readings
+    // Post request for users to send in their meter readings
     @PostMapping("/meterReading")
-    public ResponseEntity<String> postNewEnergyReading( @RequestBody Energy energyInfo){
-        try{
+    public ResponseEntity<String> postNewEnergyReading(@RequestBody Energy energyInfo) {
+        try {
             // Check if energyInfo and its fields are valid
-            if (energyInfo == null ) {
+            if (energyInfo == null) {
                 return ResponseEntity.badRequest().body("Energy information is required.");
             }
             if (energyInfo.getTransactionType() == null || energyInfo.getTransactionType().isEmpty()) {
@@ -44,40 +45,39 @@ public class EnergyController {
 //            assign energy variable outside of scope to be used in the switch
             Energy submitEnergy;
 //            get the enum of transactionType and make to uppercase as uppercase is in the transactionType enum class
-           switch (TransactionType.valueOf(energyInfo.getTransactionType().toUpperCase())){
-               case GENERATED:
-                   log.info("Generated energy recorded.");
-                   if(energyInfo.getEnergyType() == null ||energyInfo.getEnergyType().isEmpty()) {
-                       return ResponseEntity.badRequest().body("A energy type is required for generated energy.");
-                   }
-                   submitEnergy = energyRepository.save(energyInfo);
-                   break;
-               case USED:
-                   log.info("Used energy recorded.");
-                   // Set energy type to 'N/A' for used transactions
-                   if(energyInfo.getEnergyType() == null ||energyInfo.getEnergyType().isEmpty()){
-                       energyInfo.setEnergyType("N/A");
-                   }
-                   submitEnergy = energyRepository.save(energyInfo);
-                   break;
-               default:
-                   log.error("Invalid transaction type: " + energyInfo.getTransactionType());
-                   return ResponseEntity.badRequest().body("Invalid transaction type.");
-           }
+            switch (TransactionType.valueOf(energyInfo.getTransactionType().toUpperCase())) {
+                case GENERATED:
+                    log.info("Generated energy recorded.");
+                    if (energyInfo.getEnergyType() == null || energyInfo.getEnergyType().isEmpty()) {
+                        return ResponseEntity.badRequest().body("A energy type is required for generated energy.");
+                    }
+                    submitEnergy = energyRepository.save(energyInfo);
+                    break;
+                case USED:
+                    log.info("Used energy recorded.");
+                    // Set energy type to 'N/A' for used transactions
+                    if (energyInfo.getEnergyType() == null || energyInfo.getEnergyType().isEmpty()) {
+                        energyInfo.setEnergyType("N/A");
+                    }
+                    submitEnergy = energyRepository.save(energyInfo);
+                    break;
+                default:
+                    log.error("Invalid transaction type: " + energyInfo.getTransactionType());
+                    return ResponseEntity.badRequest().body("Invalid transaction type.");
+            }
             return ResponseEntity.ok("New energy reading added: \n" + submitEnergy.toString());
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assert energyInfo != null;
             log.error("Invalid transaction type provided: " + energyInfo.getTransactionType(), e);
             return ResponseEntity.badRequest().body("Invalid transaction type.");
-        } catch(Exception e){
+        } catch (Exception e) {
             log.error("Error adding new reading to your profile!");
             log.error(e.getMessage());
             return ResponseEntity.badRequest().body("Failed to add the new energy reading submission." + e.getMessage());
         }
     }
 
-     // GET endpoint which calculates the net energy difference for a specified month.
+    // GET endpoint which calculates the net energy difference for a specified month.
 
     @GetMapping("/netDifference")
     public ResponseEntity<Map<String, Object>> netEnergyDifferenceCalculation(@RequestParam int month) {
@@ -127,6 +127,17 @@ public class EnergyController {
             log.error("Failed to calculate the net energy difference for the month of " + month, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    // exception handler for when month is provided as String instead of int
+    // since we only have 1 method in this controller that requires particular type in @RequestParam we are
+    // handling this on controller level
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<Map<String, Object>> handleTypeMismatchException(MethodArgumentTypeMismatchException ex) {
+        Map<String, Object> errorResponse = new HashMap<>();
+        log.error("Invalid parameter type used to calculate netEnergyDifference. Please provide a valid month value as an integer.");
+        errorResponse.put("error", "Invalid parameter type. Please provide a valid month value as an integer.");
+        return ResponseEntity.badRequest().body(errorResponse);
     }
 }
 
