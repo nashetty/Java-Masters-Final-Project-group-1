@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Green Energy Manager</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/static/css/style.css}" />
+</head>
+<body>
+<h1>Green Energy Manager</h1>
+<main>
+
+<div class="formContainers">
+    <h2>Submit New Meter Reading</h2>
+    <form id="meterReadingForm">
+        <label for="transactionType">Transaction Type:</label>
+        <select id="transactionType" name="transactionType" required>
+            <option value="">Please select the transaction type</option>
+            <option value="generated">Generated</option>
+            <option value="used">Used</option>
+        </select>
+        <br>
+
+        <label for="energyType">Energy Type:</label>
+<!--        <input type="text" id="energyType" name="energyType">-->
+        <select id="energyType" name="energyType">
+            <option value="">Please select the energy type</option>
+            <option value="solar">Solar</option>
+            <option value="wind">Wind</option>
+        </select>
+        <br>
+
+        <label for="amountKWh">Amount (kWh):</label>
+        <input type="number" id="amountKWh" name="amountKWh" min="0">
+        <br>
+
+        <label for="transactionDate">Transaction Date:</label>
+        <input type="date" id="transactionDate" name="transactionDate">
+        <br>
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+    <div id="submitReading"></div>
+</div>
+
+<div class="formContainers">
+    <h2>Calculate Net Energy Difference</h2>
+    <form id="netDifferenceForm">
+<!--        <label for="month">Month:</label>-->
+<!--        <input type="number" id="month" name="month" min="1" max="12">-->
+
+        <label for="month">Month:</label>
+        <select id="month" name="month">
+            <option value="">Please select the month</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+
+        </select>
+        <br>
+        <button type="submit">Calculate</button>
+    </form>
+
+    <div id="netDiffResult"></div>
+</div>
+
+</main>
+
+
+<script th:src="@{/static/js/script.js}"></script>
+</body>
+</html>
