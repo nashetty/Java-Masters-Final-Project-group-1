@@ -98,6 +98,8 @@ green_energy_manager
 │
 ├── .mvn/
 ├── documentation/
+│   ├── CI_CD.md
+│   ├── docker_instructions.md
 │   ├── manualTestPlan.md
 │   ├── projectRequirements.md
 │ 
@@ -127,7 +129,11 @@ green_energy_manager
 │   ├── test/java/com.codefirstgirls.green_energy_manager
 │                   ├── controller/
 │                   │     ├── EnergyControllerTest.java
+│                   │ 
+│                   ├── GreenEnergyManagerApplicationTests.java
 ├── .gitignore
+├── docker-compose.yml
+├── Dockerfile
 ├── README.md
 ├── pom.xml
 
