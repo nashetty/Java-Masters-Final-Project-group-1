@@ -96,11 +96,15 @@ The backend is built using Spring Boot and connects to a MySQL database.
 ### Dependencies 
 
 - **Spring Boot**: For developing the RESTful API.
+- **Lombok**: For reducing boilerplate code in Java.
 - **Spring Data JPA**: For database interaction.
 - **MySQL**: Database for storing energy transactions.
 - **Swagger (OpenAPI)**: For API documentation and testing.
 - **JUnit and Mockito**: For unit testing.
 - **RestAssured**: For integration testing.
+
+### Development Tools
+- **Maven**: For building automation tool required for managing project builds, dependencies, and lifecycle.
 
 ### Technologies
 
@@ -151,11 +155,13 @@ The backend is built using Spring Boot and connects to a MySQL database.
 **4. Documentation**
 - **Swagger (OpenAPI)**:
     - Provided clear and comprehensive API documentation.
-- **projectRequirments.md**:
+- **projectRequirements.md**:
     - Documented overall project overview and structure, user stories, and acceptance criteria.
-- **README File**:
+- **README.md**:
     - Developed and maintained a README file with project instructions and information.
-  - **deploymentPlan.md**:
+- **manualTestingPlan.md**:
+    - Outlined the procedures and test cases for verifying the functionality and quality of the application.
+- **CI_CD.md**:
     - Provided detailed instructions for deploying the Green Energy Manager application and pipeline stages.
 
 ### Notes/Questions
@@ -169,3 +175,5 @@ Given the small project size and tight deadline, the following considerations ma
     - How will the system ensure the accuracy and integrity of the submitted energy data?
 4. **User Authentication**:
     - Will user authentication and authorisation be needed in the future? If so, what methods should be used?
+5. **Additional Endpoints**:
+    - Would an endpoint for the energy company to input and manage additional energy types be beneficial, enabling a comparison with user-reported energy data to provide a comprehensive analysis of generated versus used energy?
