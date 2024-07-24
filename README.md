@@ -9,6 +9,7 @@
 ### Table of Contents
 
 - [Introduction](#introduction)
+- [Links to further documentation](#Links-to-further-documentation)
 - [API Endpoints](#api-endpoints)
 - [Running Instructions](#running-instructions)
 - [Project Structure](#project-structure)
@@ -16,12 +17,16 @@
 - [Acknowledgments](#acknowledgments)
 
 
-- [Manual Test Plan](./documentation/manualTestPlan.md)
-- [Project Requirements](./documentation/projectRequirements.md)
-
 ### Introduction
 
 This project implements a RESTful API for managing and tracking energy transactions (used and produced). The API is developed using Spring Boot and provides endpoints to submit meter readings and calculate net energy differences for specified months.
+
+### Links to Further Documentation
+
+- [Project Requirements](./documentation/projectRequirements.md)
+- [Manual Test Plan](./documentation/manualTestPlan.md)
+- [CI/CD plan](./documentation/CI_CD.md)
+- [Docker Instructions](./documentation/docker_instructions.md)
 
 ### API Endpoints
 
