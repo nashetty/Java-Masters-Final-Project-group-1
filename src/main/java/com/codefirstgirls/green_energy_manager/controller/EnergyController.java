@@ -47,6 +47,9 @@ public class EnergyController {
            switch (TransactionType.valueOf(energyInfo.getTransactionType().toUpperCase())){
                case GENERATED:
                    log.info("Generated energy recorded.");
+                   if(energyInfo.getEnergyType() == null ||energyInfo.getEnergyType().isEmpty()) {
+                       return ResponseEntity.badRequest().body("A energy type is required for generated energy.");
+                   }
                    submitEnergy = energyRepository.save(energyInfo);
                    break;
                case USED:
