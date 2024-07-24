@@ -39,6 +39,7 @@ public class Energy {
     @DecimalMin(value = "0.00", inclusive = true, message = "Amount KW must be a non-negative number.")
 //    validation to ensure that input is only bigDecimal and not int
     @Digits(integer = 7, fraction = 2, message = "Amount must be a decimal with up to 7 digits and 2 decimal places")
+
 //    changed from double to BigDecimal to match sql database
     private BigDecimal amountKWh;
 
