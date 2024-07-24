@@ -80,14 +80,14 @@ jobs:
       run: mysql --user=root --password=root --host 127.0.0.1 < src/main/resources/sample-data.sql
     - name: Create MySQL admin user to access database
       env:
-        LESSON9_USER: ${{ secrets.LESSON9_USER }}
-        LESSON9_PASSWORD: ${{ secrets.LESSON9_PASSWORD }}
-      run: mysql --user=root --password=root --host 127.0.0.1 <<< "CREATE USER '$LESSON9_USER'@'localhost' IDENTIFIED BY '$LESSON9_PASSWORD'; GRANT ALL PRIVILEGES ON lesson9.* TO '$LESSON9_USER'@'localhost';"
+        ENERGY_MANAGER_USER: ${{ secrets.ENERGY_MANAGER_USER }}
+        ENERGY_MANAGER_PASSWORD: ${{ secrets.ENERGY_MANAGER_PASSWORD }}
+      run: mysql --user=root --password=root --host 127.0.0.1 <<< "CREATE USER '$ENERGY_MANAGER_USER'@'localhost' IDENTIFIED BY '$ENERGY_MANAGER_PASSWORD'; GRANT ALL PRIVILEGES ON energy_manager.* TO '$ENERGY_MANAGER_USER'@'localhost';"
 
     - name: Build and test with Maven
       env:
-        LESSON9_USER: ${{ secrets.LESSON9_USER }}
-        LESSON9_PASSWORD: ${{ secrets.LESSON9_PASSWORD }}
+        ENERGY_MANAGER_USER: ${{ secrets.ENERGY_MANAGER_USER }}
+        ENERGY_MANAGER_PASSWORD: ${{ secrets.ENERGY_MANAGER_PASSWORD }}
       run: mvn -B package
 
   deploy:
