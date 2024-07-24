@@ -68,16 +68,16 @@ This document outlines the steps for manually testing the EnergyController in th
 
 ### 4. Test Posting Energy Reading for Generated Energy
 
-**Objective:** Verify that the `postReading` endpoint correctly processes a new energy reading for generated energy.
+**Objective:** Verify that the `meterReading` endpoint correctly processes a new energy reading for generated energy.
 
 **Steps:**
 
-1. Use Postman to send a POST request to the endpoint: `/api/energy/postReading` with the following JSON body:
+1. Use Postman to send a POST request to the endpoint: `/api/energy/meterReading` with the following JSON body:
     ```json
     {
       "transactionType": "GENERATED",
       "energyType": "solar",
-      "amountKW": 50.1,
+      "amountKWh": 50.1,
       "transactionDate": "2024-07-22T00:00:00.000Z"
     }
     ```
@@ -93,16 +93,16 @@ This document outlines the steps for manually testing the EnergyController in th
 
 ### 5. Test Posting Energy Reading for Used Energy
 
-**Objective:** Verify that the `postReading` endpoint correctly processes a new energy reading for used energy.
+**Objective:** Verify that the `meterReading` endpoint correctly processes a new energy reading for used energy.
 
 **Steps:**
 
-1. Use Postman to send a POST request to the endpoint: `/api/energy/postReading` with the following JSON body:
+1. Use Postman to send a POST request to the endpoint: `/api/energy/meterReading` with the following JSON body:
     ```json
     {
       "transactionType": "USED",
       "energyType": "wind",
-      "amountKW": 48.1,
+      "amountKWh": 48.1,
       "transactionDate": "2024-07-22T00:00:00.000Z"
     }
     ```
@@ -118,16 +118,16 @@ This document outlines the steps for manually testing the EnergyController in th
 
 ### 6. Test Posting Energy Reading with Invalid Transaction Type
 
-**Objective:** Verify that the `postReading` endpoint returns a bad request error when an invalid transaction type is provided.
+**Objective:** Verify that the `meterReading` endpoint returns a bad request error when an invalid transaction type is provided.
 
 **Steps:**
 
-1. Use Postman to send a POST request to the endpoint: `/api/energy/postReading` with the following JSON body:
+1. Use Postman to send a POST request to the endpoint: `/api/energy/meterReading` with the following JSON body:
     ```json
     {
       "transactionType": "NOTVALID",
       "energyType": "wind",
-      "amountKW": 48.1,
+      "amountKWh": 48.1,
       "transactionDate": "2024-07-22T00:00:00.000Z"
     }
     ```
@@ -140,16 +140,16 @@ This document outlines the steps for manually testing the EnergyController in th
 
 ### 7. Test Posting Energy Reading with Database Error
 
-**Objective:** Verify that the `postReading` endpoint returns a bad request error when there is a database error.
+**Objective:** Verify that the `meterReading` endpoint returns a bad request error when there is a database error.
 
 **Steps:**
 
-1. Use Postman to send a POST request to the endpoint: `/api/energy/postReading` with the following JSON body:
+1. Use Postman to send a POST request to the endpoint: `/api/energy/meterReading` with the following JSON body:
     ```json
     {
       "transactionType": "GENERATED",
       "energyType": "wind",
-      "amountKW": 48.1,
+      "amountKWh": 48.1,
       "transactionDate": "2024-07-22T00:00:00.000Z"
     }
     ```
@@ -162,11 +162,11 @@ This document outlines the steps for manually testing the EnergyController in th
 
 ### 8. Test Posting Energy Reading with Empty Body
 
-**Objective:** Verify that the `postReading` endpoint returns a bad request error when the request body is empty.
+**Objective:** Verify that the `meterReading` endpoint returns a bad request error when the request body is empty.
 
 **Steps:**
 
-1. Use Postman to send a POST request to the endpoint: `/api/energy/postReading` with an empty JSON body: `{}`.
+1. Use Postman to send a POST request to the endpoint: `/api/energy/meterReading` with an empty JSON body: `{}`.
 2. Verify the response status is HTTP 400 Bad Request.
 
 **Expected Result:**
@@ -177,15 +177,15 @@ This document outlines the steps for manually testing the EnergyController in th
 
 ### 9. Test Posting Energy Reading with Missing Transaction Type
 
-**Objective:** Verify that the `postReading` endpoint returns a bad request error when the transaction type is missing.
+**Objective:** Verify that the `meterReading` endpoint returns a bad request error when the transaction type is missing.
 
 **Steps:**
 
-1. Use Postman to send a POST request to the endpoint: `/api/energy/postReading` with the following JSON body:
+1. Use Postman to send a POST request to the endpoint: `/api/energy/meterReading` with the following JSON body:
     ```json
     {
       "energyType": "solar",
-      "amountKW": 50.1,
+      "amountKWh": 50.1,
       "transactionDate": "2024-07-22T00:00:00.000Z"
     }
     ```
@@ -197,6 +197,49 @@ This document outlines the steps for manually testing the EnergyController in th
 > 400
 
 
+### 10. Test Posting Energy Reading with Missing amountkWh
+
+**Objective**: Verify that the meterReading endpoint returns a bad request error when the amountkWh  field is missing in the request body.
+
+**Steps**:
+
+1. Use Postman to send a POST request to the endpoint: `/api/energy/meterReading` with the following JSON body:
+   ```json
+    { "transactionType": "GENERATED",
+      "energyType": "solar",
+      "transactionDate": "2024-07-22T00:00:00.000Z"
+    }
+    ```
+   
+2. Verify that the response status is HTTP 400 Bad Request.
+
+**Expected Result**:
+- Status code: 
+> 400
+
+
+
+### 11. Test Posting Energy Reading with Missing transactionDate
+
+**Objective**: Verify that the meterReading endpoint returns a bad request error when the transactionDate field is missing in the request body.
+
+**Steps**:
+1. Use Postman to send a POST request to the endpoint: `/api/energy/meterReading` with the following JSON body:
+
+   ```json
+    {
+      "transactionType": "GENERATED",
+      "energyType": "solar",
+      "amountKWh": 50.1
+      
+    }
+    ```
+2. Verify that the response status is HTTP 400 Bad Request.
+
+**Expected Result**:
+- Status code:
+> 400
+
 ## Further Testing Ideas
 
 ### Test Access Control for Authenticated Users
@@ -206,14 +249,14 @@ This document outlines the steps for manually testing the EnergyController in th
 **Steps:**
 
 1. Use Postman to send a GET and POST request to the endpoint without authentication.
-2. Verify the response status is HTTP 401 Unauthorized.
+2. Verify the response status is HTTP 401 Unauthorised.
 
 **Expected Result:**
 
 - Status code: 
 > 401
 - Response body: 
-> `{"error": "Unauthorized access"}`
+> `{"error": "Unauthorised access"}`
 
 ### Test Role-Based Access Control
 
