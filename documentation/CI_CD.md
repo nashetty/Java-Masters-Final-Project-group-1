@@ -1,9 +1,16 @@
-### CI/CD Plan for Green Energy Manager API
+# CI/CD Plan for Green Energy Manager API
 
-#### Overview
+## Overview
 
 This CI/CD plan outlines the steps to automate the building, testing, and deployment of the Green Energy Manager 
 API project using a popular CI/CD tool GitHub Actions.
+
+### Table of Contents
+
+- [Steps:](#steps)
+- [Pipeline Configuration Example](#pipeline-configuration-example)
+- [Steps Explanation](#steps-explanation)
+- [Notes](#notes)
 
 ### Steps:
 
