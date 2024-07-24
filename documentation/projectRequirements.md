@@ -161,6 +161,8 @@ The backend is built using Spring Boot and connects to a MySQL database.
     - Developed and maintained a README file with project instructions and information.
 - **manualTestingPlan.md**:
     - Outlined the procedures and test cases for verifying the functionality and quality of the application.
+- **docker_instructions.md**:
+    - Provided a step-by-step guide for running the project locally using Docker, including instructions for packaging the application, creating a Docker image, configuring docker-compose, and accessing the API.
 - **CI_CD.md**:
     - Provided detailed instructions for deploying the Green Energy Manager application and pipeline stages.
 
