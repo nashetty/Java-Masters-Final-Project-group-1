@@ -52,7 +52,7 @@ public class EnergyControllerTest {
         ResponseEntity<Map<String, Object>> response = energyController.netEnergyDifferenceCalculation(month);
 
         // Assert that the response status is HTTP 200 OK.
-        assertEquals(HttpStatus.OK.value(), response.getStatusCodeValue(), "The status code is HTTP 200 OK");
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode().value(), "The status code is HTTP 200 OK");
 
         // Assert that the response body is not null
         Map<String, Object> responseBody = response.getBody();
@@ -75,7 +75,7 @@ public class EnergyControllerTest {
         ResponseEntity<Map<String, Object>> response = energyController.netEnergyDifferenceCalculation(invalidMonth);
 
         // Assert that the response status is HTTP 400 Bad Request.
-        assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatusCodeValue(), "Expected HTTP 400 Bad Request");
+        assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatusCode().value(), "Expected HTTP 400 Bad Request");
 
         // Assert that the error message in the response body is appropriate for the invalid month input.
         assertNotNull(response.getBody());
@@ -97,7 +97,7 @@ public class EnergyControllerTest {
         ResponseEntity<Map<String, Object>> response = energyController.netEnergyDifferenceCalculation(month);
 
         // Assert that the response status is HTTP 200 OK
-        assertEquals(HttpStatus.OK.value(), response.getStatusCodeValue(), "Expected HTTP status 200");
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode().value(), "The status code is HTTP 200 OK");
 
         // Assert that the response body returns a net energy difference of 0 kWh
         Map<String, Object> responseBody = response.getBody();
