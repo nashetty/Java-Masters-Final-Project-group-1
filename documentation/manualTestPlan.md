@@ -82,14 +82,14 @@ This document outlines the steps for manually testing the EnergyController in th
     }
     ```
 2. Verify the response status is HTTP 200 OK.
-3. Verify the response body contains the message: `New energy reading added {meterReading}`.
+3. Verify the response body contains the message: `New energy reading added: {meterReading}`.
 
 **Expected Result:**
 
 - Status code: 
 > 200
 - Response body: 
->`New energy reading added {meterReading}`
+>`New energy reading added: {meterReading}`
 
 ### 5. Test Posting Energy Reading for Used Energy
 
@@ -107,14 +107,14 @@ This document outlines the steps for manually testing the EnergyController in th
     }
     ```
 2. Verify the response status is HTTP 200 OK.
-3. Verify the response body contains the message: `New energy reading added {meterReading}`.
+3. Verify the response body contains the message: `New energy reading added: {meterReading}`.
 
 **Expected Result:**
 
 - Status code: 
 > 200
 - Response body: 
-> `New energy reading added {meterReading}`
+> `New energy reading added: {meterReading}`
 
 ### 6. Test Posting Energy Reading with Invalid Transaction Type
 
