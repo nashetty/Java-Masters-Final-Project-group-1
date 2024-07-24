@@ -21,7 +21,7 @@ This document outlines the steps for manually testing the EnergyController in th
 
 **Steps:**
 
-1. Use Postman to send a GET request to the endpoint: `/api/energy/netEnergyDifference?month=4`.
+1. Use Postman to send a GET request to the endpoint: `/api/energy/netDifference?month=4`.
 2. Verify the response status is HTTP 200 OK.
 3. Verify the response body contains the message: `Net Energy Difference for APRIL is: 8 kWh`.
 
@@ -38,7 +38,7 @@ This document outlines the steps for manually testing the EnergyController in th
 
 **Steps:**
 
-1. Use Postman to send a GET request to the endpoint: `/api/energy/netEnergyDifference?month=13`.
+1. Use Postman to send a GET request to the endpoint: `/api/energy/netDifference?month=13`.
 2. Verify the response status is HTTP 400 Bad Request.
 3. Verify the response body contains the error message: `Invalid month. Please provide a month value between 1 and 12.`
 
@@ -55,7 +55,7 @@ This document outlines the steps for manually testing the EnergyController in th
 
 **Steps:**
 
-1. Use Postman to send a GET request to the endpoint: `/api/energy/netEnergyDifference?month=8`.
+1. Use Postman to send a GET request to the endpoint: `/api/energy/netDifference?month=8`.
 2. Verify the response status is HTTP 200 OK.
 3. Verify the response body contains the message: `Net Energy Difference for AUGUST is: 0 kWh`.
 
