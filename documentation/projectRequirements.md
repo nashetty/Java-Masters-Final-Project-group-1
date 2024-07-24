@@ -10,12 +10,12 @@
     + [Implementation](#implementation)
     + [Acceptance Criteria](#acceptance-criteria)
     + [Testing Considerations](#testing-considerations)
-    + [Dependencies ](#dependencies)
+    + [Dependencies](#dependencies)
     + [Development Tools](#development-tools)
     + [Technologies](#technologies)
     + [Project-Related Tickets](#project-related-tickets)
     + [Task Delegation](#task-delegation)
-    + [Notes/Questions](#notesquestions)
+    + [Notes/Questions/Stretch Goals](#notesquestionsstretch-goals)
 
 ## Project Overview
 
@@ -24,6 +24,9 @@
 The Green Energy Manager is an application designed to help users track their energy usage and production. The application has two primary functionalities:
 1. Recording energy transactions.
 2. Calculating the Net Energy Difference (NED) for a specified month.
+
+This project may qualify as an MVP(Minimum Viable Product), as it provides the essential backend functionality for recording energy readings and calculating the net energy difference. 
+This facilitates validating core features and gathering feedback, even without a user interface.
 
 The backend is built using Spring Boot and connects to a MySQL database.
 
@@ -110,7 +113,7 @@ The backend is built using Spring Boot and connects to a MySQL database.
 4. **Security and Vulnerability Testing**:
     - Execute security tests to identify and mitigate potential vulnerabilities, including authentication and authorisation mechanisms.
 
-### Dependencies 
+### Dependencies
 
 - **Spring Boot**: For developing the RESTful API.
 - **Lombok**: For reducing boilerplate code in Java.
@@ -183,7 +186,7 @@ The backend is built using Spring Boot and connects to a MySQL database.
 - **CI_CD.md**:
     - Provided detailed instructions for deploying the Green Energy Manager application and pipeline stages.
 
-### Notes/Questions
+### Notes/Questions/Stretch Goals
 
 Given the small project size and tight deadline, the following considerations may be addressed in future iterations or as the project evolves:
 1. **Date Handling**:
@@ -196,3 +199,6 @@ Given the small project size and tight deadline, the following considerations ma
     - Will user authentication and authorisation be needed in the future? If so, what methods should be used?
 5. **Additional Endpoints**:
     - Would an endpoint for the energy company to input and manage additional energy types be beneficial, enabling a comparison with user-reported energy data to provide a comprehensive analysis of generated versus used energy?
+6. **Basic Front End**:
+    - Should a simple front end be developed to allow users to upload energy readings, select a period with a dropdown menu, calculate the Net Energy Difference,and view the results?
+
