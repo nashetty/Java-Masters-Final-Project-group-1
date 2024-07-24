@@ -1,4 +1,14 @@
-# To run the project locally using Docker, please follow the steps below:
+# Green Energy Manager and Docker
+
+## Why use docker
+Using Docker containers offers several benefits. The main ones worth mentioning in our case are:
+1. **Consistency Across Environments:** Containers ensure that your application runs the same way regardless of 
+where it is deployed, eliminating the common "it worked on my computer" problem.
+2. **Simplified database integration:** By using Docker containers, the database setup is streamlined as it will be 
+automatically initialized when the container is built. This eliminates the need for any additional local database 
+setup on your computer, allowing you to use the API immediately.
+
+## Steps to run the project locally using Docker:
 
 1. **In IntelliJ** - In the terminal execute `mvn clean` (alternatively, do this by opening the Maven sidebar and 
 double-clicking **`green-energy-manager -> Lifecycle -> clean`**).  
@@ -38,7 +48,7 @@ the container and repeating step 6. You might still need to manually restart the
 This usually fixes the issue.
 
 
-8. **Access the API** - You can access the API endpoints by clicking on the link in the ‘Ports’ column 
+8. **Access the API** - With the container successfully running, you can now access the API endpoints by clicking on the link in the ‘Ports’ column 
 (e.g., **8080:8080** which redirects to **http://localhost:8080/**). You can then access the endpoints as usual 
 in the browser or in Postman.
 
