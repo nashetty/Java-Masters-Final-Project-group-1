@@ -88,7 +88,9 @@ public class EnergyController {
 
     @GetMapping("/netDifference")
     public ResponseEntity<Map<String, Object>> netEnergyDifferenceCalculation(@RequestParam int month) {
+        log.info("Received request to calculate net energy difference for month: {}", month);
         if (month < 1 || month > 12) {
+            log.warn("Invalid month value: {}. Must be between 1 and 12.", month);
             Map<String, Object> errorResponse = new HashMap<>();
             errorResponse.put("error", "Invalid month. Please provide a month value between 1 and 12.");
             return ResponseEntity.badRequest().body(errorResponse);
@@ -124,6 +126,7 @@ public class EnergyController {
 
             // This response message will be displayed to the user.
             String message = "Net Energy Difference for " + monthName + " is: " + roundedNetEnergyDifference + " kWh";
+            log.info("Calculated net energy difference message: {}", message);
 
             // Structure of the message for displaying  the calculated value of the  Net Energy Difference and a descriptive message to the user.
             Map<String, Object> responseMessage = new HashMap<>();
