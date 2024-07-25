@@ -16,7 +16,7 @@ label {
 }
 
 input, select, button {
-    margin: 5px 0 15px;
+    margin: 5px 0 10px;
     padding: 5px 0 5px 15px;
     background-color: #e5efdc;
     border-radius: 20px;
@@ -25,7 +25,7 @@ input, select, button {
 
 input {
     height: 28px;
-    width: 293px;
+    width: 241px;
 }
 
 button {
@@ -34,16 +34,20 @@ button {
     font-size: 16px;
     font-weight: 600;
     height: 42px;
-    width: 312px;
+    width: 260px;
 }
 
 button:hover {
     background-color: #adbf9c;
 }
 
+#meterReadingForm button {
+    margin-top: 10px;
+}
+
 select {
     height: 40px;
-    width: 312px;
+    width: 260px;
 }
 
 main {
@@ -54,16 +58,29 @@ main {
 }
 
 #submitReading, #netDiffResult {
-    width: 314px;
+    width: 260px;
     text-align: center;
 }
 
 h1 {
     text-align: center;
 }
-
+.tabName {
+    margin-top: 100px;
+    width: 70%;
+    text-align: center;
+}
 .formContainers {
+    background-image: url("../background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 800px;
+}
+
+#submitReading p {
+    margin-top: 0;
 }
